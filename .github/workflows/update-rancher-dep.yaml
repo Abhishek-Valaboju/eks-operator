@@ -23,20 +23,22 @@ env:
 jobs:
   create-rancher-pr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
           ref: ${{github.event.inputs.ref}}
           path: eks-operator
       - name: Checkout rancher/rancher
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           fetch-depth: 0
           repository: rancher/rancher
           ref: ${{github.event.inputs.rancher_ref}}
           path: rancher
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
         with:
           go-version: ${{ env.SETUP_GO_VERSION }}
       - name: Run release script
